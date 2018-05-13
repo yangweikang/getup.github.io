@@ -29,10 +29,12 @@ module.exports = {
 
 * 这样就浮出webpack三种hash值输出：
 
-    1.1. hash：该hash计算方式是计算所有chunks的 hash；适用于dev环境；
-    1.2. chunkhash：为每个chunk计算hash；适用于prod环境；
-    1.3. contenthash：根据文件内容计算hash;适用于css文件；
-    >总结：综上选择1.2解决hash变动问题；
+    1.1 hash：该hash计算方式是计算所有chunks的 hash->适用于dev环境;
+
+    1.2 chunkhash：为每个chunk计算hash->适用于prod环境；
+    
+    1.3 contenthash：根据文件内容计算hash->适用于css文件；
+>总结：综上选择1.2解决hash变动问题；
 * 配置：
 ```js
      output: {
