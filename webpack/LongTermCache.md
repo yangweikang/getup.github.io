@@ -67,6 +67,7 @@ module.exports = {
 ```html
       <%=htmlWebpackPlugin.files.webpackManifest%>
 ```
-
+    
+    注意：HtmlWebpackPlugin与html-loder无法并行；
 >扩展前端部署：https://www.zhihu.com/question/20790576/answer/32602154
     
