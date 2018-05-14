@@ -44,7 +44,7 @@ module.exports = {
         chunkFilename: '[name].[chunkhash:8].bundle.js',
     }
 ```
-    注意：不能和热编译模块一起使用该hash；
+    注意：(chunkhash)不能和热编译模块(HotModuleReplacementPlugin)一起使用该hash；
 
 #### 触发问题      
     2. 采用manifest解决了，异动的js变化但是，多了manifest.js增加web请求！
