@@ -34,7 +34,9 @@ module.exports = {
     1.2 chunkhash：为每个chunk计算hash->适用于prod环境；
     
     1.3 contenthash：根据文件内容计算hash->适用于css文件；
+
 >总结：综上选择1.2解决hash变动问题；
+
 * 配置：
 ```js
      output: {
@@ -51,6 +53,7 @@ module.exports = {
     1. html-webpack-plugin@2.30.1
     2. inline-manifest-webpack-plugin@3.0.1
 * 配置：
+1. webpack.config.prod
 ```js
      new InlineManifestWebpackPlugin({
         name: 'webpackManifest'
@@ -59,6 +62,10 @@ module.exports = {
         template: 'index.html', 
         inject: true
     })
+```
+2. index.html
+```html
+      <%=htmlWebpackPlugin.files.webpackManifest%>
 ```
 
 >扩展前端部署：https://www.zhihu.com/question/20790576/answer/32602154
