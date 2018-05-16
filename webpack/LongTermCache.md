@@ -52,6 +52,7 @@ module.exports = {
     因为这个代码manifest量并不是很大所以，内联进index.html，需要两个插件：
     1. html-webpack-plugin@2.30.1
     2. inline-manifest-webpack-plugin@3.0.1
+    3. HashedModuleIdsPlugin
 * 配置：
 1. webpack.config.prod
 ```js
@@ -62,6 +63,7 @@ module.exports = {
         template: 'index.html', 
         inject: true
     })
+     new webpack.HashedModuleIdsPlugin()
 ```
 2. index.html
 ```html
