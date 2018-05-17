@@ -10,6 +10,7 @@
     npm run start/buid //运行 package.json script 
 ```
 ```json
+// package.json
 {
     "name": "cms-frame",
     "version": "1.3.0",
@@ -69,7 +70,6 @@
         "vuex": "^2.4.0"
     }
 }
-
 ```
 # webpack 构架工具
 1. 性能 代码分割，公共代码提取，提取有效代码,缓存持久化
@@ -83,7 +83,6 @@ const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
-
 
 module.exports = {
     entry: {//入口
@@ -399,7 +398,6 @@ const mutations = {//记录每次变化
         state.active = data;
     }
 }
-
 const cityViewModule = {
     namespaced: true,
     state,
@@ -603,8 +601,7 @@ export default assessModule;
         }
     obj.getThis(); // func 
 ```
-
-6.  模板字符串
+  6.模板字符串
 ```js
     var obj={
         name:'ywkang',
@@ -634,8 +631,9 @@ export default assessModule;
         }
  ```
  # Element-ui
-   
-
+```bash
+详细见八闽视频开发
+```
 
 
 
