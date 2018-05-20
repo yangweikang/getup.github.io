@@ -14,11 +14,11 @@ console.log(i);//3 PS:提升为全局作用域
 console.log(window.i);//3 PS:提升为全局作用域
 ```
 ***
-2. 2将变量定义为var，该变量将为【函数作用域】，由于解析器即浏览器，解析前将先读取出var function变量，导致了函数内作用域提升!
+2. 2将变量定义为var，该变量将为【函数作用域】，由于解析器即浏览器，执行该方法前先读取出var function变量，导致了函数内作用域提升!
 ```js
 (function () {
   console.log(j);//undefined PS:提升为undefined
-  console.log(n);// n is not defined PS:n与i进行对比
+ // console.log(n);// n is not defined PS:n与i进行对比
   for (var i = 0; i < 3; i++) {
      console.log(i);
   }
@@ -26,7 +26,7 @@ console.log(window.i);//3 PS:提升为全局作用域
   
 })();
 console.log(i);
-console.log(window.i);
+console.log(window.i); //i is not defined
 ```
 ***
 3. 引发问题: 由于var只存在函数作用域，setTimeout将被推入内存栈队列中，导致输出不为理想0 1 2结果

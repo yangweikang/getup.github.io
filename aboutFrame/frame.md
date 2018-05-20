@@ -1,13 +1,15 @@
+
 # 前端工程化 
 ![工程化](./img/工程化.png)
 
-1. 通过cnpm使用
+#  npm
+```bash
+    1. 通过cnpm使用
     npm install - g cnpm--registry = https://registry.npm.taobao.org
 
-2. 常用框架指令
-```bash
+    2. 常用框架指令
     npm install  //根据当前目录下package.json下载相关依赖
-    npm run start/buid //运行 package.json script 
+    npm run start/build //运行 package.json script 
 ```
 ```json
 // package.json
@@ -15,12 +17,12 @@
     "name": "cms-frame",
     "version": "1.3.0",
     "private": false,
-    "scripts": {
+    "scripts": {//执行
         "start": "cross-env NODE_ENV='development' webpack-dev-server --inline --progress  --port 8082",
         "build": "rimraf dist && cross-env NODE_ENV='production' node   webpack.config.js"
     },
     "license": "ISC",
-    "devDependencies": {
+    "devDependencies": {//开发依赖
         "babel-core": "^6.25.0",
         "babel-helper-vue-jsx-merge-props": "^2.0.3",
         "babel-loader": "^7.1.0",
@@ -56,7 +58,7 @@
         "webpack-dev-server": "^2.6.1",
         "webpack-merge": "^4.1.0"
     },
-    "dependencies": {
+    "dependencies": {//生产依赖
         "axios": "^0.16.2",
         "echarts": "^4.0.4",
         "element-ui": "^2.3.6",
@@ -310,14 +312,6 @@ export default {
             ywkang:''
         }
     },
-    created() {//创建后
-        this.$store.dispatch("mainModule/loginInfo", {}).then(res => {})
-    },
-    mounted() {//实例化
-        $.datetimepicker.setLocale('ch');
-        $('.sfTimeIn').datetimepicker(); 
-        this.commonfn();//混入方法调用
-    },
     computed: {//计算属性 
         ...mapState({//直接拉取
             dataTime: state => state.cityViewModule.dataTime,//拉取时间展现 
@@ -329,12 +323,50 @@ export default {
             return `【八闽视频】查询审核：{uName},{time},审核原因:${this.msg};验证码:{smsCode}`;
         }
     },
-    methods: {//方法
+    created() {//创建后
+        this.$store.dispatch("mainModule/loginInfo", {}).then(res => {})
+    },
+    mounted() {//实例化
+        $.datetimepicker.setLocale('ch');
+        $('.sfTimeIn').datetimepicker(); 
+        this.commonfn();//混入方法调用
+    },
+     methods: {//方法
         fileExp(){  
             this.$store.dispatch("mainModule/fileExp", {"btime":_b,"etime":_e,PAGE_TYPE: this.selected });
         }
     },
-    components: { //组件注册
+    filters: {//自定义局部过滤器
+        //单位转换
+        conversionUnit(value, fileDir) {
+            if (fileDir === 1 || fileDir === 2) return "";
+            var decimal = 2; //两位小数
+            var v = value;
+            if (v < 1024) return 1 + "KB";
+            if ((v = parseFloat((value / 1024 / 1024 / 1024 / 1024))) >= 1) {
+                return v.toFixed(decimal) + "TB";
+            } else if ((v = parseFloat((value / 1024 / 1024 / 1024))) >= 1) {
+                return v.toFixed(decimal) + "GB";
+            } else if ((v = parseFloat((value / 1024 / 1024))) >= 1) {
+                return v.toFixed(decimal) + "MB";
+            } else if ((v = parseFloat((value / 1024))) >= 1) {
+                return v.toFixed(decimal) + "KB";
+            }
+        } 
+    },
+    directives: { //自定义局部指令
+        focus: {
+            //当被绑定元素插入到DOM中时获取焦点
+            inserted(el) {
+                el.focus();
+                //IE兼容性
+                let l = el._value.length;
+                el.selectionStart = l;
+                el.selectionEnd = l;
+            }
+        }
+    },
+    components: { //自定义局部组件注册
         'el-date-picker': DatePicker,
         'el-dialog': Dialog
     }
@@ -353,6 +385,7 @@ export default {
 ```
 
 # Vuex（redux）
+![vuex](./img/vuex.png)
 ```js
 //vuex代码
 import { post, get, all, formDate, upload } from './../../../util/core.js';
@@ -452,7 +485,8 @@ export default assessModule;
     let [a,b]=arr[0,1];
    console.log(a,b);//0,1
 //Objcet
-    let {name,age}={name:'YWKANG',age:'xxx',pag:'yy'}
+    let {name,age}={name:'YWKANG',age:'xxx',pag:'yy'};
+    let param={name,age};//{name:'YWKANG',age:'xxx',pag:'yy'};
     console.log(name,age);//YWKANG,xxx
 //... jquery:$.extend ,浅拷贝
     let startTime={time:'2018/05/12'};
@@ -630,10 +664,47 @@ export default assessModule;
             );
         }
  ```
+# 工具方法
+ ```bash
+# util/tools.js //请求/时间转换/参数转换
+# util/core.js //数据校验
+# routers/router.js 
+1. 拦截校验
+2. 权限校验
+3. 请求头部设置
+4. * 公共请求链接设置
+# filter/filter.js//数据转换显示
+# directives/directive.js//dom操作
+ ```
+
+ 
  # Element-ui
 ```bash
 详细见八闽视频开发
 ```
 
+# 注意
+ * 编辑器推荐vscode，集成node环境便于开发，插件资源丰富推荐插件：
+    1. 语法高亮：vetur。
+    2. 路径提示补齐： path intellisense。
+    3. 编译器调试：Debugger for Chrome js。
+ * js开发规范
+    1. 文件名，变量名注意命名规范。
+    2. js中尽量少抒写id操作dom，减少dom操作，按照业务方式命名避免重复。
+    3. 代码中on事件在组件生命周期结束时请自行销毁，避免全局污染。
+    4. 异步请求统一存[name]Moulde.js。
+ * css开发规范
+    1. css中避免大量的死代码，无效的图片路径，内联样式，影响性能及后期维护成本。
+    2. css原则上禁止id选择器。
+    3. html body标签避免出现类或者样式选择器。
+    4. 引入字体、样式；非独立组件，独立样式作用域，引入请在polyfill.js。
+    
+ * PS：纯属个人理解如有错误，请及时指正谢谢！
+ * @Author: ywkang 
+ * @Date: 2018-05-18 17:32:48 
+ * @Last Modified by: ywkang
+ * @Last Modified time: 2018-05-18 17:34:15
+ 
+ 
 
 
