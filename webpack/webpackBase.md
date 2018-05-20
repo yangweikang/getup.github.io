@@ -413,7 +413,7 @@ module.exports = {
             },
             chunksSortMode: 'dependency'
         }),
-        new webpack.HashedModuleIdsPlugin()
+        new webpack.HashedModuleIdsPlugin()//稳定hash值
 
     ]
 }
