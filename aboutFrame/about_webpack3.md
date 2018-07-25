@@ -698,6 +698,10 @@ export default assessModule;
     2. css原则上禁止id选择器。
     3. html body标签避免出现类或者样式选择器。
     4. 引入字体、样式；非独立组件，独立样式作用域，引入请在polyfill.js。
+ * vue开发规范
+    1. 禁止v-for与v-if在同一节点上使用
+    2. v-for中必须:key
+    
     
  * PS：纯属个人理解如有错误，请及时指正谢谢！
  * @Author: ywkang 
