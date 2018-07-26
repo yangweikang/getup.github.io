@@ -644,7 +644,7 @@ export default assessModule;
     console.log(`姓名:${obj.name}年龄:${obj.age}`);//姓名:ywkang年龄:xx
 ```
 
-# Vue-jsx（react.js）
+# Vue-jsx（react.js）智能路测
 ```js
     renderHeader(createElement, { column}) {//隐藏列表头渲染，事件绑定
             return createElement(
@@ -680,7 +680,7 @@ export default assessModule;
  
  # Element-ui
 ```bash
-详细见八闽视频开发
+详细见八闽视频开发;
 ```
 
 # 注意
@@ -705,9 +705,9 @@ export default assessModule;
     
  * PS：纯属个人理解如有错误，请及时指正谢谢！
  * @Author: ywkang 
- * @Date: 2018-05-18 17:32:48 
+ * @Date: 2018-07-26 17:32:48 
  * @Last Modified by: ywkang
- * @Last Modified time: 2018-05-18 17:34:15
+ * @Last Modified time: 2018-07-26 17:34:15
  
  
 
