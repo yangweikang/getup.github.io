@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    div {
+        color: red;
+        border-width: 1px;
+        border-style: solid;
+        margin-bottom: 10px;
+
+    }
+
+    div.margin-left-10 {
+        margin-left: -10px;
+    }
+
+    div.padding-border-left-10 {
+        padding-left: -10px;
+        border-width: -10px;
+    }
+
+    div.bg-prarent {
+        margin: 10px;
+        background-color: blue;
+     
+
+       
+    }
+
+    div.bg-prarent .child {
+        margin: 30px;
+        height: 270px;
+        background: url(./img/1.png) no-repeat red;
+        text-align: right;
+        color: black;
+     
+    }
+    .pd{
+        padding: 20px;
+    }
+   
+</style>
+
+<body>
+    <div>
+        <pre>
+            div{
+                color: red;
+                border-width: 1px;
+                border-style: solid;
+            } 
+        </pre>
+    </div>
+
+    <div class="margin-left-10">
+        <pre>
+            div.margin-left-10 {
+                margin-left: -10px;
+            }
+        </pre>
+    </div>
+    <div class="padding-border-left-10">
+        <pre>
+            div.padding-border-left-10 {
+                padding-left: -10px;
+                border-width: -10px;
+            }
+        </pre>
+    </div>
+
+    <div class="bg-prarent">
+        <div class="child">
+            <pre>
+                div.bg-prarent .child {
+                        margin: 30px;
+                        height: 270px;
+                        background: url(./img/1.png) no-repeat red;
+                        text-align: right;
+                        color: black;
+                    }
+        </pre>
+        </div>
+        <div class="child pd">
+            <pre>
+                .pd{
+                     padding: 20px;
+                }
+        </pre>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

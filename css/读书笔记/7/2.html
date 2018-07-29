@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+        }
+
+        /* margin-right margin-left width 其中两个值为定值 有任意一个值为auto 其余值将补足父元素的宽度 */
+
+        /*  
+           margin-left: auto; 
+           父div为800px 
+           marginLeft=parentDivWidth-marginRight-width;
+        */
+
+        div {
+            width: 1000px;
+            background-color: red;
+        }
+
+        p {
+            width: 400px;
+            background-color: rebeccapurple;
+        }
+
+        .p1 {
+            margin-left: auto;
+            margin-right: 200px;
+        }
+
+        .p2 {
+            margin-left: auto;
+            margin-right: 400px;
+        }
+
+        /* 
+           margin-right: auto; 
+           父div为800px 
+           marginRight=parentDivWidth-marginLeft-width;
+        */
+
+        .p3 {
+            margin-right: auto;
+            margin-left: 100px;
+        }
+
+        .p4 {
+            margin-right: auto;
+            margin-left: 300px;
+        }
+
+
+        /* margin-right margin-left width 都为固定值时 margin-right 会被覆盖设置为auto*/
+
+        .p5 {
+            margin-right: 100px;
+            margin-left: 100px;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div>
+        <p class="p1"> margin-left: auto;</p>
+        <p class="p2"> margin-left: auto;</p>
+        <P class="p3"> margin-right: auto;</P>
+        <P class="p4"> margin-right: auto;</P>
+        <P class="p5"> margin-right: 300px; margin-left: 300px;</P>
+    </div>
+</body>
+
+</html>
