@@ -241,7 +241,33 @@ myApp.$mount("#app");//挂载
 
 # Vue-Router
 
-### Vue-Router访问顺序
+### 两种地址格式(hash，history) 地址格式
+```bash
+ hash: (http://localhost:8082/#/main/video)
+ history: (http://localhost:8082/main/video) //404
+```
+#### 网站根目录web.config 文件，内容如下：
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <system.webServer>
+    <rewrite>
+      <rules>
+        <rule name="Handle History Mode and custom 404/500" stopProcessing="true">
+          <match url="(.*)" />
+          <conditions logicalGrouping="MatchAll">
+            <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
+            <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" />
+          </conditions>
+          <action type="Rewrite" url="/" />
+        </rule>
+      </rules>
+    </rewrite>
+  </system.webServer>
+</configuration>
+```
+
+### Vue-Router访问顺序 
 ```bash
 http://localhost:8082/ == {main.vue} 
     -->redirect：http://localhost:8082/#/main/video   == {video.vue}  
@@ -692,7 +718,7 @@ export default assessModule;
     1. 文件名，变量名注意命名规范。
     2. js中尽量少抒写id操作dom，减少dom操作，按照业务方式命名避免重复。
     3. 代码中on事件在组件生命周期结束时请自行销毁，避免全局污染。
-    4. 异步请求统一存[name]Moulde.js。
+    4. 异步请求统一存放[name]Moulde.js。
  * css开发规范
     1. css中避免大量的死代码，无效的图片路径，内联样式，影响性能及后期维护成本。
     2. css原则上禁止id选择器。
@@ -705,9 +731,9 @@ export default assessModule;
     
  * PS：纯属个人理解如有错误，请及时指正谢谢！
  * @Author: ywkang 
- * @Date: 2018-07-26 17:32:48 
+ * @Date: 2018-07-27 17:32:48 
  * @Last Modified by: ywkang
- * @Last Modified time: 2018-07-26 17:34:15
+ * @Last Modified time: 2018-07-27 17:34:15
  
  
 
