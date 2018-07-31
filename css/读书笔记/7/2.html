@@ -27,6 +27,7 @@
         p {
             width: 400px;
             background-color: rebeccapurple;
+            margin-bottom: 30px;
         }
 
         .p1 {
@@ -62,6 +63,50 @@
             margin-right: 100px;
             margin-left: 100px;
         }
+
+        /* margin-right margin-left width 都为auto 则margin-right margin-left 0px；width会近可能大 */
+
+        .p6 {
+            margin-right: auto;
+            margin-left: auto;
+            width: auto;
+        }
+
+        /* width为auto；而margin-right margin-left 其中任意一个为auto则auto为零 */
+
+        .p7-1 {
+            margin-right: auto;
+            margin-left: 100px;
+            width: auto;
+        }
+
+        .p7-2 {
+            margin-right: 100px;
+            margin-left: auto;
+            width: auto;
+        }
+
+        /* 负外边距 */
+
+        div.black {
+            width: 400px;
+            border: 3px solid black;
+        }
+
+        p.wide {
+            margin-left: 10px;
+            width: auto;
+            margin-right: -50px;
+            border: 3px solid gray;
+        }
+
+         
+        p.wide-q {
+            margin-left: 10px;
+            width: 500px;
+            margin-right: auto;
+            border: 3px solid gray;
+        }
     </style>
 </head>
 
@@ -73,6 +118,14 @@
         <P class="p3"> margin-right: auto;</P>
         <P class="p4"> margin-right: auto;</P>
         <P class="p5"> margin-right: 300px; margin-left: 300px;</P>
+        <P class="p6"> margin-right: auto; margin-left: auto; width: auto;</P>
+        <P class="p7-1"> margin-right: auto; margin-left: 100px; width: auto;</P>
+        <P class="p7-2"> margin-right: 100px; margin-left: auto; width: auto;</P>
+    </div>
+
+    <div class="black">
+        <p class="wide"></p>
+        <p class="wide-q"></p>
     </div>
 </body>
 
