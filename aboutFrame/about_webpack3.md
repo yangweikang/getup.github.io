@@ -209,15 +209,17 @@ npm run start -->webpackconfog.js
 ```js
 //main.js
 import Vue from 'vue';
-import App from './components/app.vue'; 
-import store from './store/store';  //vuex
-import router from './routers/router';  //vueRoutr
-export var myApp = new Vue({//实例
+import App from './components/app.vue';
+import store from './store/store';//vuex
+import router from './routers/router';  //vueRouter
+import './filter/filter';//过滤器
+import './directives/directives';//指令 
+import './util/components/element-ui/index'; //element-ui
+new Vue({//实例
     store,
     router: router,
     render: h => h(App)//jsx?
-})
-myApp.$mount("#app");//挂载
+}).$mount("#app");//挂载
 ```
 ```html 
 <!-- index.html -->
@@ -235,13 +237,37 @@ myApp.$mount("#app");//挂载
     <loading></loading>
 </div>
 </template>
+
 ```
-
-
-
 # Vue-Router
 
-### Vue-Router访问顺序
+### 两种地址格式(hash，history) 地址格式
+```bash
+ hash: (http://localhost:8082/#/main/video)
+ history: (http://localhost:8082/main/video) //404
+```
+#### 网站根目录web.config 文件，内容如下：
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <system.webServer>
+    <rewrite>
+      <rules>
+        <rule name="Handle History Mode and custom 404/500" stopProcessing="true">
+          <match url="(.*)" />
+          <conditions logicalGrouping="MatchAll">
+            <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
+            <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" />
+          </conditions>
+          <action type="Rewrite" url="/" />
+        </rule>
+      </rules>
+    </rewrite>
+  </system.webServer>
+</configuration>
+```
+
+### Vue-Router访问顺序 
 ```bash
 http://localhost:8082/ == {main.vue} 
     -->redirect：http://localhost:8082/#/main/video   == {video.vue}  
@@ -329,9 +355,9 @@ export default {
     mounted() {//实例化
         $.datetimepicker.setLocale('ch');
         $('.sfTimeIn').datetimepicker(); 
-        this.commonfn();//混入方法调用
+        this.goParam();//混入方法调用
     },
-     methods: {//方法
+    methods: {//方法
         fileExp(){  
             this.$store.dispatch("mainModule/fileExp", {"btime":_b,"etime":_e,PAGE_TYPE: this.selected });
         }
@@ -374,11 +400,61 @@ export default {
 ```
 # Vue[mixins]
 ```js
-// commtable.js
-export default { 
-    methods: {//方法
-        commonfn(){  
-            this.$store.dispatch("mainModule/fileExp", {"btime":_b,"etime":_e,PAGE_TYPE: this.selected });
+/*
+ * @Author: ywkang 
+ * @Date: 2018-06-11 10:08:10 
+ * @Last Modified by: ywkang
+ * @Last Modified time: 2018-07-30 18:07:22
+ * @About This Components: 全局混入  
+ */
+import {urlParams} from './../util/core';
+export default {
+    methods: {
+        UrlRouter(url) {//路由跳转
+            this.$router.push(url);
+        },
+        goParam(path) {//路由携参跳转
+            this.$router.push({ path, query: this.$route.query});
+        },
+        winOpen(path) {//新建标签打开
+            window.open(path + "?" + urlParams(this.$route.query));
+        },
+        formatDate(row, column) { //el表格时间转换 
+            return (row[column.property] || '').replace('T', ' ');
+        },
+        percent(row, column) { //el表格百分比转换 
+            return Number((row[column.property] || 0) * 100).toFixed(2);
+        },
+        parseFloatPercentage(val) { //el进度条百分比转换 
+            return parseFloat(((val||0)*100).toFixed(2))>100?parseFloat((val||0).toFixed(2)):parseFloat(((val||0)*100).toFixed(2));
+        },
+        objectSpanMethod({row, column,rowIndex,columnIndex}) {//el表格行合并
+            if (columnIndex === 0) {
+                if (rowIndex % 2 === 0) {
+                    return {
+                        rowspan: 2,
+                        colspan: 1
+                    };
+                } else {
+                    return {
+                        rowspan: 0,
+                        colspan: 0
+                    };
+                }
+            }
+        },
+        minWidthHeader(createElement, { column}) {  //el表格表头最小宽度
+            let fontSize=12;
+            let padding=20+10;
+            let sortableSize=24;
+            let {sortable,label}=column;
+            let minWidth= label.length*fontSize+padding;
+            column.minWidth=sortable?minWidth+sortableSize:minWidth;
+            return label;
+        },
+        clearFileVal(e) {//上传成功清除选择文件
+             e.dataTransfer = '';
+             e.target.value = '';
         }
     }
 }
@@ -403,7 +479,6 @@ const getters = {//依赖计算
         return formDate(new Date(new Date(state.dataTime).getTime()+ {'min':0.25,'hour':1}[state.selected]* 60 * 60 * 1000),'hh:mm');
     }
 }
-
 //vuex状态记录未使用！！！！！
 const actions = {//action
     getData: async ({ }, getParam) => {  
@@ -425,7 +500,6 @@ const actions = {//action
         commit("GET_ACTIVE", params);//提交改变
     }
 }
-
 const mutations = {//记录每次变化
     ["GET_ACTIVE"](state, data) {
         state.active = data;
@@ -490,12 +564,11 @@ export default assessModule;
     console.log(name,age);//YWKANG,xxx
 //... jquery:$.extend ,浅拷贝
     let startTime={time:'2018/05/12'};
-    let ctiy={name:'福州',id：'0591'};
-   
-    //ES6:Object.assign() 
+    let ctiy={name:'福州',id:'0591'};
+//ES6:Object.assign() 
     let exParam=Object.assign(startTime,ctiy);
     console.log(exParam);//{time:'2018/05/12',name:'福州'，id：'0591'}
-    //...
+//...
     let exParam={...startTime,...ctiy};
     console.log(exParam);//{time:'2018/05/12',name:'福州'，id：'0591'}
 ```
@@ -635,7 +708,7 @@ export default assessModule;
         }
     obj.getThis(); // func 
 ```
-  6.模板字符串
+6.模板字符串
 ```js
     var obj={
         name:'ywkang',
@@ -644,7 +717,7 @@ export default assessModule;
     console.log(`姓名:${obj.name}年龄:${obj.age}`);//姓名:ywkang年龄:xx
 ```
 
-# Vue-jsx（react.js）
+# Vue-jsx（react.js）智能路测
 ```js
     renderHeader(createElement, { column}) {//隐藏列表头渲染，事件绑定
             return createElement(
@@ -676,11 +749,72 @@ export default assessModule;
 # filter/filter.js//数据转换显示
 # directives/directive.js//dom操作
  ```
-
  
- # Element-ui
-```bash
-详细见八闽视频开发
+ # Element-ui（单独引入）
+```js
+<!-- 引入样式 -->
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts-en.common.js"></script>
+
+ <div id="app">
+    <el-table :data="tableData" border>
+        <el-table-column prop="date" label="日期" width="140">
+        </el-table-column>
+        <el-table-column prop="name" label="姓名" width="120">
+        </el-table-column>
+        <el-table-column prop="address" label="地址">
+        </el-table-column>
+     </el-table>
+ </div>
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                tableData: [{
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                },{
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                },{
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                },{
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                },{
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                },{
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                },{
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                },{
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                },{
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                }]
+            }
+        }
+    })
+</script>
 ```
 
 # 注意
@@ -692,7 +826,7 @@ export default assessModule;
     1. 文件名，变量名注意命名规范。
     2. js中尽量少抒写id操作dom，减少dom操作，按照业务方式命名避免重复。
     3. 代码中on事件在组件生命周期结束时请自行销毁，避免全局污染。
-    4. 异步请求统一存[name]Moulde.js。
+    4. 异步请求统一存放[name]Moulde.js。
  * css开发规范
     1. css中避免大量的死代码，无效的图片路径，内联样式，影响性能及后期维护成本。
     2. css原则上禁止id选择器。
@@ -705,9 +839,9 @@ export default assessModule;
     
  * PS：纯属个人理解如有错误，请及时指正谢谢！
  * @Author: ywkang 
- * @Date: 2018-05-18 17:32:48 
+ * @Date: 2018-07-30 17:32:48 
  * @Last Modified by: ywkang
- * @Last Modified time: 2018-05-18 17:34:15
+ * @Last Modified time: 2018-07-30 17:34:15
  
  
 
