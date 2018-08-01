@@ -86,27 +86,38 @@
             width: auto;
         }
 
-        /* 负外边距 */
+        /* 右 负外边距 */
 
         div.black {
             width: 400px;
             border: 3px solid black;
         }
-
         p.wide {
+            margin-left: 10px;
+            width: auto;
+            margin-right: -50px;
+           
+        }
+         p.wide-border {
             margin-left: 10px;
             width: auto;
             margin-right: -50px;
             border: 3px solid gray;
         }
-
-         
         p.wide-q {
             margin-left: 10px;
             width: 500px;
             margin-right: auto;
             border: 3px solid gray;
         }
+        /* 左 负外边距 */
+        p.wide-l {
+            margin-left: -50px;
+            width: auto;
+            margin-right: 10px;
+            border: 3px solid gray;
+        }
+
     </style>
 </head>
 
@@ -125,7 +136,10 @@
 
     <div class="black">
         <p class="wide"></p>
+        <p class="wide-border"></p>
         <p class="wide-q"></p>
+
+        <p class="wide-l"></p>
     </div>
 </body>
 
