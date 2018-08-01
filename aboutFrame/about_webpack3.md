@@ -404,7 +404,7 @@ export default {
  * @Author: ywkang 
  * @Date: 2018-06-11 10:08:10 
  * @Last Modified by: ywkang
- * @Last Modified time: 2018-07-30 18:07:22
+ * @Last Modified time: 2018-07-31 14:48:03
  * @About This Components: 全局混入  
  */
 import {urlParams} from './../util/core';
@@ -560,7 +560,7 @@ export default assessModule;
    console.log(a,b);//0,1
 //Objcet
     let {name,age}={name:'YWKANG',age:'xxx',pag:'yy'};
-    let param={name,age};//{name:'YWKANG',age:'xxx',pag:'yy'};
+    let param={name,age};//{name:'YWKANG',age:'xxx'};
     console.log(name,age);//YWKANG,xxx
 //... jquery:$.extend ,浅拷贝
     let startTime={time:'2018/05/12'};
