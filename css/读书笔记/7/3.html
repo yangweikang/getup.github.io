@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>垂直属性</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px
+        }
+
+        .box-12 {
+            font-size: 12px;
+            display: inline-block;
+        }
+
+        .box-14 {
+            font-size: 14px;
+            display: inline-block;
+        }
+
+        .box {
+            height: 6em;
+            background-color: chocolate;
+
+        }
+
+        .boder-box{
+            margin-top: 50px;
+            border: 1px gray dashed;
+        }
+        .boder-box p{
+            margin: 2em 0;
+            background-color: gold;
+        }
+
+        .boder-none{
+            margin-top: 50px;
+        }
+        .boder-none p{
+            margin: 2em 0;
+            background-color: gold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box-12">
+        <div class="box">ywkang</div>
+    </div>
+    <div class="box-14">
+        <div class="box">ywkang</div>
+    </div>
+
+    <div style="height:6em;border: 1px dashed gray;">
+        <p style="height:50%;border: gold 1px dashed">ywkang</p>
+    </div>
+
+
+    <div style="border: 1px solid blue;margin-top: 50px;">
+        <p style="height:50%;border: fuchsia 1px dashed">yangweikang</p>
+    </div>
+
+<!-- auto 高度  -->
+    <div class="boder-box">
+        <p>ywkang</p>
+    </div>
+    <div class="boder-none">
+        <p>ywkang</p>
+    </div>
+
+</body>
+
+</html>
