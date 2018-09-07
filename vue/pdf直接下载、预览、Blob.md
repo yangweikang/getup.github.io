@@ -36,7 +36,7 @@ export function downFile ({fileName='eg.xls',data}) {
     let link = document.createElement('a')
     link.style.display = 'none'
     link.href = url
-    link.setAttribute('download',fileName)
+    link.setAttribute('download')
     document.body.appendChild(link)
     link.click()
 }
