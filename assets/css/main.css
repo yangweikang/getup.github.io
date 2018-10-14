@@ -94,7 +94,13 @@ pre {
 .item1, .item2 {
 	height: 100px;
 }
-
+.table td a{
+	display: inline-block; 
+    width: 280px; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 .item1 {
 	background-color: red;
 }
