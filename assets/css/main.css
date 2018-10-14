@@ -824,9 +824,10 @@ li.popup-socials-icons {
 	background-color: #f14603;
 }
 .icon.pop-up {
-				font-size: 1.0em;
-				color: #ffffff;
-			}
+	font-size: 1.0em;
+	color: #ffffff;
+	background: #4071bb;
+}
 .pop-up-color {
 	background-color: #fff;
 }
