@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>弹性盒子-子元素均分父宽度-如何计算</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+            list-style: none;
+        }
+        .box{
+            width:500px;
+            height:500px;
+            border: 1px solid #000;
+            margin: 20px;
+            display: flex;
+        }
+        .div{
+            height:100px;
+            background: red;
+            font-size: 40px;
+            color: #fff;
+            text-align: center;
+            line-height: 100px;
+        }
+        /* * 子元素在划分父元素宽度，先刨除固定宽度 */
+        .item1{
+            flex: 1;
+        }
+        .item2{
+            flex: 2;
+        }
+    </style>
+    <script>
+    </script>
+</head>
+<body>
+    <div class="box">
+        <div class="div item1">1</div>
+        <div class="div item2">2</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>绝对定位垂直居中实现，缺点</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+            list-style: none;
+        }
+        .box{
+            width:500px;
+            height:500px;
+            border: 1px solid #000;
+            margin: 20px;
+            position: relative;
+        }
+         /* 绝对定位垂直居中实现 
+            缺点：多个出现覆盖情况如下
+         */
+        .div{
+            width:100px;
+            height:100px;
+            background: red;
+            font-size: 40px;
+            color: #fff;
+            text-align: center;
+            line-height: 100px;
+            
+            position: absolute;
+            left:50%;
+            top:50%;
+            /* margin-left:-50px;
+            margin-top:-50px; */
+            transform: translate(-50%, -50%);
+        }
+    </style>
+    <script>
+    </script>
+</head>
+<body>
+    <div class="box">
+        <div class="div">1</div>
+        <div class="div">2</div>
+    </div>
+</body>
+</html>

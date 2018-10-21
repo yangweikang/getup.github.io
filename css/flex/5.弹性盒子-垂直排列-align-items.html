@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title> 弹性盒子-垂直排列-align-items</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        /* 
+        弹性盒子垂直排列
+        center		居中
+		flex-end	底部
+		flex-start	开始
+         */
+        .box {
+            width: 500px;
+            height: 500px;
+            border: 1px solid #000;
+            margin: 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+        }
+
+        .div {
+            width: 100px;
+            height: 100px;
+            background: red;
+            font-size: 40px;
+            color: #fff;
+            text-align: center;
+            line-height: 100px;
+        }
+    </style>
+    <script>
+    </script>
+</head>
+
+<body>
+    <div class="box">
+        <div class="div">1</div>
+        <div class="div">2</div>
+    </div>
+</body>
+
+</html>

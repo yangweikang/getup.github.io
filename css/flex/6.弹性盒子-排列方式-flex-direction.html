@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title> 弹性盒子-排列方式-flex-direction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        /* 
+        flex-direction:		排列方式
+		row	横向排列
+		row-reverse	横向翻过排列
+		column	纵向排列
+		column-reverse	纵向翻过排列
+         */
+        .box {
+            width: 500px;
+            height: 500px;
+            border: 1px solid #000;
+            margin: 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-direction: column-reverse;
+        }
+
+        .div {
+            width: 100px;
+            height: 100px;
+            background: red;
+            font-size: 40px;
+            color: #fff;
+            text-align: center;
+            line-height: 100px;
+        }
+    </style>
+    <script>
+    </script>
+</head>
+
+<body>
+    <div class="box">
+        <div class="div">1</div>
+        <div class="div">2</div>
+    </div>
+</body>
+
+</html>
