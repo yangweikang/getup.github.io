@@ -95,7 +95,6 @@ class HelloWorld extends Component {
                 <HelloProps name="YWKANG this props 1" />
                 <HelloProps name="YWKANG this props 2" />
                 <HelloProps name="YWKANG this props 3" />
-                <Clock />
             </div>
         );
     }

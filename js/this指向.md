@@ -33,9 +33,9 @@
             }
         }
     }
-    objPratent.obj.getName();//ywkang
+    objPratent.obj.getName();//obj
     var objWindow=objPratent.obj.getName;
-    objWindow();//ywkang
+    objWindow();//windowname
 
 5.4.  //this是指向函数作用域，对象嵌套的形式，不存在函数作用域，因此定义箭头函数的时候还是指向window
     var name = 'windowname';
@@ -48,9 +48,9 @@
             }
         }
     }
-    objPratent.obj.getName();//ywkang
+    objPratent.obj.getName();//windowname
     var objWindow=objPratent.obj.getName;
-    objWindow();//ywkang
+    objWindow();//windowname
 
 5.5. //这里是外部作用域 this指向window，即最终console中的this指向window
     var name ='ywkang';
