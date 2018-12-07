@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+        <script>
+            // function bubleSort(arr) {
+            //     var sz = arr.length;
+            //     for (i = 0; i < sz; i++) {
+            //         for (j = 0; j < sz - i - 1; j++) {
+            //             if (arr[j] < arr[j + 1]) {
+            //                 var tmp = arr[j];
+            //                 arr[j] = arr[j + 1];
+            //                 arr[j + 1] = tmp;
+            //             }
+            //         }
+            //     }
+            //     return arr;
+            // }
+            // console.log(bubleSort([5, 4, 3, 1]));
+            function quicksort(a, left, right) {
+                
+                if (left > right) {
+                    //一定要有这个判断，因为有递归left和i-1，若没有这个判断条件，该函数会进入无限死错位递归
+                    return;
+                }
+                debugger;
+
+                var i = left,
+                    j = right,
+                    jizhun = a[left]; //基准总是取序列开头的元素
+
+                while (i != j) {
+                    //该while的功能为每一趟进行的多次比较和交换最终找到位置k。当i==j时意味着找到k位置了
+                    while (a[j] >= jizhun && i < j) {
+                        j--;
+                    } //只要大于等于基准数，j指针向左移动直到小于基准数才不进入该while。i<j的限制条件也是很重要，不然一直在i!=j这个循环里，j也会越界
+                    while (a[i] <= jizhun && i < j) {
+                        i++;
+                    } //只要小于等于基准数，i指针向右移动直到大于基准数才不进入该while。等于条件也是必要的，举例[4,7,6,4,3]验证一下是两个4交换
+                    if (i < j) {
+                        //如果i==j跳出外层while
+                        t = a[i];
+                        a[i] = a[j];
+                        a[j] = t;
+                    }
+                }
+
+                a[left] = a[i]; //交换基准数和k位置上的数
+                a[i] = jizhun;
+
+                quicksort(a, left, i - 1);
+                quicksort(a, i + 1, right);
+            }
+
+            var array = [4, 7, 2, 8, 3, 9, 12];
+           quicksort(array, 0, array.length - 1); //排完序后再看array是[2, 3, 4, 7, 8, 9, 12]
+
+           
+          
+        </script>
+    </head>
+    <body></body>
+</html>

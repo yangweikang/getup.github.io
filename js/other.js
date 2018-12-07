@@ -47,42 +47,42 @@ for (let index = 0; index < 8; index++) {
 // })(foo);
 // console.log(foo);
 
-// var name = "The Window";
-// var object = {
-//     name: "My Object",
-//     getNameFunc: function() {
-//         var that = this;
-//         return function() {
-//             return that.name;
-//         };
-//     }
-// };
-// console.log(object.getNameFunc()());
+var name = "The Window";
+var object = {
+    name: "My Object",
+    getNameFunc: function() {
+        var that = this;
+        return function() {
+            return that.name;
+        };
+    }
+};
+console.log(object.getNameFunc()());
 
-// var name = "The Window";
-// var object = {
-//     name: "My Object",
-//     getNameFunc: function() {
-//         return function() {
-//             return this.name;
-//         };
-//     }
-// };
-// let kk=object.getNameFunc();
-// console.log(kk());
+var name = "The Window";
+var object = {
+    name: "My Object",
+    getNameFunc: function() {
+        return function() {
+            return this.name;
+        };
+    }
+};
+let kk=object.getNameFunc();
+console.log(kk());
 
-// var name = "The Window";
-// var object = {
-//     name: "My Object",
-//     getNameFunc: function() {
-//         this.name="dfsdfs";
-//         return (function(){
-//             return this.name;
-//         })();
-//     }
-// };
+var name = "The Window";
+var object = {
+    name: "My Object",
+    getNameFunc: function() {
+        this.name="dfsdfs";
+        return (function(){
+            return this.name;
+        })();
+    }
+};
 
-// console.log(object.getNameFunc());
+console.log(object.getNameFunc());
 
 var add = (function() {
     return function() {
@@ -386,10 +386,12 @@ function name(
 
 //ajax
 let xhr = XMLHttpRequest();
-xhr.open("GET", URL, true);//1
+xhr.open("GET", URL, true); //1
 xhr.onreadystatechange = function() {
-    if (xhr.readyState === 4) {//2
-        if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {//3
+    if (xhr.readyState === 4) {
+        //2
+        if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+            //3
             var data = xhr.responseText;
             console.log(data);
         }
@@ -399,41 +401,91 @@ xhr.onreadystatechange = function() {
 xhr.onerror = function() {
     console.log("Oh, error");
 };
-xhr.send();//4
+xhr.send(); //4
 
-1.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-let xhr=new XMLHttpRequest();
-xhr.open('GET',URL,true);
-xhr.onreadystatechange=function() {
-   if( xhr.readyState===4){
-       if(xhr.status>=200&&xhr.status<300||xhr.status===304){
-            console.log(xhr.responseText)
-       }
-   }
-    
+//作用域链
+var a = 10;
+function name(params) {
+    console.log(a);
 }
-xhr.onerror=function(e){
-    console.log(e);
+name();
+
+function foo() {
+    var max = 10;
+    return function bar(x) {
+        if (x > max) {
+            console.log(x);
+        }
+    };
 }
-xhr.send();
+var fa = foo();
+var max = 100;
+fa(15);
+
+//上级作用域，当前的作用域的地址在哪一个作用域下定义，上一级就是谁；
+var counter = 100;
+function fn() {
+    var counter = 0;
+    fn.count = function(params) {
+        console.log(++counter);
+    };
+    window.print = function(params) {
+        console.log(--counter);
+    };
+    function plus(params) {
+        console.log(++counter);
+    }
+    return plus;
+}
+var foo = fn();
+foo();
+print();
+fn.count();
+foo.count();
+
+var a = 10;
+function fn() {
+    var a = 1;
+    return fn;
+    function fn() {
+        console.log(a);
+    }
+}
+var f = fn();
+f();
+
+//冒泡排序
+function bubleSort(arr) {
+    var sz = arr.length;
+    for (var i = 0; i < sz; i++) {
+        for (var j = 0; j < sz - i - 1; j++) {
+            if (arr[j] < arr[j + 1]) {
+                var tmp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = tmp;
+            }
+        }
+    }
+    return arr;
+}
+console.log(bubleSort([5, 4, 3, 1]));
+
+//选择排序
+function selectSort(arr) {
+    var min;
+    var sz = arr.length;
+    for (var i = 0; i < sz; i++) {
+        min = i;
+        for (var j = i + 1; j < sz; j++) {
+            arr[j] < arr[min] && (min = j);
+        }
+        if (min != i) {
+            var tmp = arr[i];
+            arr[i] = arr[min];
+            arr[min] = tmp;
+        }
+    }
+    return arr;
+}
+console.log(selectSort([5, 4, 3, 1]));
 
